@@ -1,17 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Oswald:wght@200..700&family=Roboto+Slab:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
-    background-image: url(https://cdn.discordapp.com/attachments/818171495863287869/1204496755727540365/corregedoria_resized.png?ex=65e76705&is=65d4f205&hm=44a1aa69ebe8c9921123df4d7605f78fac8da6cd1772b0b2ba66b92a82c9e4d1&);
+    background-image: url(https://cdn.discordapp.com/attachments/1209837977501433906/1209861833570390046/Sem-Titulo-1.png?ex=65e876a3&is=65d601a3&hm=ff5699d5ba852bfa7198233bad79ea9eba1a6221d28e8f07545180a94762d444&);
+    height: 100vh;
+    width: 100vw;
 }
 
 #formulario {
-    border: 2px solid #000;
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #fff; /* Cor de fundo branca para o formulário */
+    border: 4px solid #000;
+    padding: 15px;
+    border-radius: 15px;
+    background: linear-gradient(72deg, #b3b1b1 1%, #525151 99%); /* Cor de fundo branca para o formulário */
 }
 
 label {
@@ -26,21 +31,28 @@ textarea {
     padding: 8px;
     margin-top: 5px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: 2px solid #000000;
+    border-radius: 10px;
     box-sizing: border-box;
 }
-
 input[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #0c75ff;
+    color: rgb(255, 255, 255);
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     float: right;
+    font-size: 15px;
 }
-
 input[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: #20bd28;
+}
+.font {
+    
+    color: #fff;
+}
+.corr {
+    font-family: 'Franklin Gothic ITALIC';
+    font-weight: bold; /* Deixa o texto em negrito */
 }
