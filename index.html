@@ -1,16 +1,19 @@
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Denuncias para Corregedoria</title>
-    <link rel="stylesheet" href="./style.css"/> 
+    <link rel="stylesheet" href="./style.css"/>
+    
 </head>
 <body>
-   <div id="formulario">
-        <h1 class="font" style="text-align: center;"><p class="corr" >CORREGEDORIA</p>Denuncia Space Police 1.0</h1>
+    <div id="formulario">
+        <img src="./logo corregedoria.png" alt="Logo da Corregedoria" class="logo">
+        <h1 class="font" style="text-align: center;"><p class="corr">CORREGEDORIA</p>Denuncia Space Police 1.0</h1>
         <form id="denunciaForm" action="#" method="POST">
             <label for="nome"><b>Nome na Cidade:</b></label>
-            <input type="text" id="nome" name="nome" placeholder="Seu Nome na Space " required><br>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome na Space" required><br>
             
             <label for="identificador"><b>ID:</b></label>
             <input type="text" id="identificador" name="identificador" placeholder="Seu ID da Space" required><br>
@@ -21,8 +24,11 @@
             <label for="url"><b>URL:</b></label>
             <input type="url" id="url" name="url" placeholder="Link do Video do Ocorrido" required><br>
             
+            <div id="extraLinks"></div>
+            <button type="button" id="addLinkBtn"><b>Adicionar Links Extras</b></button><br>
+            
             <label for="descricao"><b>Descrição:</b></label><br>
-            <textarea id="descricao" name="descricao"  rows="4" cols="50" placeholder="Descrever sobre o que aconteceu..." required></textarea><br>
+            <textarea id="descricao" name="descricao" rows="4" cols="50" placeholder="Descrever sobre o que aconteceu..." required></textarea><br>
             
             <input type="submit" value="Enviar">
         </form>
@@ -35,13 +41,18 @@
             const webhookURL = "https://discord.com/api/webhooks/1205157043615301702/iuCNlywCJNS2kHnDqPLMnySmL-C6gZdf8nG7hW4hWjXs6M6f7TeOOVu0bsDaVj2laFfe"; // Insira a URL do seu webhook aqui
             const formData = new FormData(this);
 
+            let extraLinks = "";
+            document.querySelectorAll(".extra-url").forEach((input, index) => {
+                extraLinks += `\n**URL Extra ${index + 1}:** ${input.value}`;
+            });
+
             fetch(webhookURL, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    content: `**Nome:** ${formData.get("nome")}\n**ID:** ${formData.get("identificador")}\n**Data:** ${formData.get("data")}\n**URL:** ${formData.get("url")}\n**Descrição:** ${formData.get("descricao")}`
+                    content: `**Nome:** ${formData.get("nome")}\n**ID:** ${formData.get("identificador")}\n**Data:** ${formData.get("data")}\n**URL:** ${formData.get("url")}${extraLinks}\n**Descrição:** ${formData.get("descricao")}`
                 })
             }).then(response => {
                 if (!response.ok) {
@@ -49,15 +60,26 @@
                 }
                 alert("Formulário enviado com sucesso para a Corregedoria !!!");
                 document.getElementById("denunciaForm").reset(); // Limpa o formulário após o envio
+                linkCount = 0;
+                document.getElementById("extraLinks").innerHTML = ""; // Limpa os links extras
             }).catch(error => {
                 console.error(error);
                 alert("Erro ao enviar mensagem para a Corregedoria. Por favor, tente novamente mais tarde.");
             });
         });
-    </script>
-</body>
-</html>
-    
 
+        let linkCount = 0;
+        const maxLinks = 5;
+        document.getElementById("addLinkBtn").addEventListener("click", function() {
+            if (linkCount < maxLinks) {
+                linkCount++;
+                const newLinkDiv = document.createElement("div");
+                newLinkDiv.innerHTML = `<label for="extraUrl${linkCount}"><b>URL Extra ${linkCount}:</b></label><input type="url" id="extraUrl${linkCount}" name="extraUrl${linkCount}" class="extra-url" placeholder="Link do Video do Ocorrido"><br>`;
+                document.getElementById("extraLinks").appendChild(newLinkDiv);
+            } else {
+                alert("Você só pode adicionar até 5 links extras.");
+            }
+        });
+    </script>
 </body>
 </html>
